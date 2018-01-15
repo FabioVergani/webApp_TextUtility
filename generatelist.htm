@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			html{background:#eee;font:12px sans-serif;}
+			main{padding:4px;margin:4px;text-align:right;}
+			main *{box-sizing:border-box;}
+			fieldset{padding:12px;margin:0 0 5px 0;text-align:left;border:1px solid #c7c7c7;}
+			input[placeholder],textarea{width:100%}
+			p input{width:5em;padding:4px;}
+			#result{height:calc(100vh - 230px);}
+		</style>
+	</head>
+	<body>
+		<main>
+			<fieldset>
+				<legend>Generate List:</legend>
+				<input type="text" id="prefix" placeholder="Prefix">
+				<p>
+					<span>
+						<label><b>Start</b>:&nbsp;<input type="number" min="0" id="start" value="1"></label>&ensp;
+						<label><b>End</b>:&nbsp;<input type="number" min="0" id="end" value="365"></label>
+					</span>
+					&emsp;
+					<span>
+						<label><b>Pad</b>&thinsp;(len):&nbsp;<input type="number" id="p" value="3" min="0"></label>&ensp;
+						<label><b>Pad</b>&thinsp;(chr):&nbsp;<input type="text" id="q" value="0" autocomplete="on"></label>
+					</span>
+				</p>
+				<input type="text" id="postfix" placeholder="Postfix">
+			</fieldset>
+			<button id="generate" style="">Generate</button>
+			<button id="copy" style="">Copy</button>	
+			<fieldset>
+				<legend>Result:</legend>
+				<textarea id="result"></textarea>
+			</fieldset>
+		</main>
+		<script>
+			(function(w){
+				function $(x){return d.getElementById(x)}
+
+				const d=w.document, S=w.String, N=w.Number, $result=$('result'), $prefix=$('prefix'), $postfix=$('postfix'), $start=$('start'), $end=$('end'), $p=$('p'), $q=$('q');
+				
+				$('copy').onclick=function(){$result.select();d.execCommand("Copy");};
+				
+				$('generate').onclick=function(){
+					const m=[], a=$prefix.value, b=$postfix.value, l=$end.value, p=$p.value, q=$q.value;
+					for(let j=0,i=N($start.value);i<l;++j,++i){m[j]=a+S(i).padStart(p,q)+b;};
+					$result.innerHTML=m.join('\n');
+				};
+
+			})(window);
+		</script>
+	</body>
+</html>
