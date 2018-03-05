@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+<style>
+body{
+	background:#c5c5c5;
+	text-align:right;
+	padding:0;
+	margin:0;
+	overflow:hidden;
+}
+
+textarea{
+	display:block;
+	height:100%;width:100%;margin:0 auto;
+	box-sizing:border-box;
+	text-align:left;
+}
+
+#table{
+	position:absolute;top:0;left:0;right:0;bottom:0;
+	width:100%;height:100%;
+}
+
+#table td{vertical-align:top;}
+
+#button{margin:6px;}
+#in{resize:none;height:96px;margin-bottom:3px;background:#f7f3f3;}
+#invia
+</style>
+	</head>
+	<body>
+		<table id="table">
+			<tr>
+				<td style="height:120px;"><textarea id="in"></textarea><button id="submit">INVIA</button></td>
+			</tr>
+			<tr>
+				<td><textarea id="out-odd"></textarea></td>
+			</tr>
+			<tr>
+				<td><textarea id="out-even"></textarea></td>
+			</tr>
+		</table>
+	</body>
+<script>
+const d=document,
+In=d.getElementById('in'),
+OutOdd=d.getElementById('out-odd'),
+OutEven=d.getElementById('out-even');
+
+d.getElementById('submit').onclick=function(){
+	const a=[],b=[],c=In.value.split('\n'),l=c.length; 
+	In.value='';
+	for(let i=0,j=false;i<l;++i){((j=!j)?a:b).push(c[i]);};
+	OutOdd.value=a.join('\n');
+	OutEven.value=b.join('\n');
+};
+
+</script>
+</html>
